@@ -10,13 +10,12 @@ from werkzeug import secure_filename
 app = Flask(__name__, static_url_path = "")
 UPLOAD_FOLDER = 'upload'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.debug = True
 
 class ZipEncoder(object):
     def __init__(self, incoming):
         self.incoming = incoming
 
-    def ANALzip(self, filename):
+    def zip(self, filename):
         command = ["/usr/bin/zip", "-9", "-", filename]
         if os.path.isdir(filename):
             command.insert(2, "-r")
@@ -27,7 +26,7 @@ class ZipEncoder(object):
 
 
     def __call__(self, *argl):
-        return self.ANALzip(self.incoming)
+        return self.zip(self.incoming)
 
 @app.route("/upload", methods = ['POST'])
 def upload():
@@ -39,7 +38,7 @@ def upload():
 
 @app.route('/uploaded_file')
 def uploaded_file():
-    return "LAFELLA"
+    return ""
 
 @app.route("/static/<path:filename>")
 def static(filename):
