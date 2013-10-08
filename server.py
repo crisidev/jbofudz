@@ -41,7 +41,7 @@ def uploaded_file():
     return ""
 
 @app.route("/static/<path:filename>")
-def static(filename):
+def send_static(filename):
     return send_from_directory("static", filename)
 
 @app.route("/<path>")
@@ -72,5 +72,5 @@ def root():
     return txt
 
 if __name__ == "__main__":
-    app.run("0.0.0.0", 8080)
+    app.run("0.0.0.0", 8081)
 
